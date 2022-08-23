@@ -1,0 +1,101 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+class Node
+{
+    public:
+          int data;
+          Node* next;
+};
+int size(Node* n)
+{   int size =0;
+    while(n!=NULL)
+    {
+        n =n->next;
+        size++;
+    }
+    return size;
+}
+void InsertStart(Node** head,int x)
+{
+    Node* n =new Node();
+    n->data =x;
+    n->next =*head;
+    
+    *head =n;
+     cout<<x<<" is inserted at start"<<endl;
+}
+void InsertEnd(Node** head,int x)
+{
+    Node* n =new Node();
+    n->data =x;
+    n->next =NULL;
+    Node* temp =*head;
+    if(head ==NULL)
+    {
+        *head =n;
+        return;
+    }
+    while(temp->next!=NULL)
+    {
+        temp =temp->next;
+    }
+    temp->next =n;
+    cout<<x<<" is inserted at end"<<endl;
+    
+}
+void insertPosition(int pos,Node** head,int x)
+{
+    int len =size(*head);
+    if(pos<1 || pos>len)
+    {
+        cout<<" not posible to insert"<<endl;
+    }
+    else
+    {
+        Node* n =new Node();
+        n->data =x;
+        n->next =NULL; 
+        Node* temp =*head;
+        while(--pos)
+        {
+            temp =temp->next;
+        }
+        n->next =temp->next;
+        temp->next =n;
+        cout<<x<<" is inserted at the position"<<endl;
+    }
+}
+void display(Node* n)   //to display elements in linked list
+{
+    while(n!=NULL)
+    {
+        cout<<n->data<<" ";
+         n=n->next;
+    }
+}
+int main() {
+    Node* head =NULL;
+    InsertStart(&head,12);
+    InsertStart(&head,15);
+    InsertEnd(&head,34);
+    InsertEnd(&head,14);
+    cout<<"the size of linked list is "<<size(head)<<endl;
+    insertPosition(3,&head,4);
+    cout<<"the size of linked list is "<<size(head)<<endl;
+    cout<<"the element in linked list are "<<endl;
+    display(head);
+    return 0;
+}
+
+
+o/p
+12 is inserted at start
+15 is inserted at start
+34 is inserted at end
+14 is inserted at end
+the size of linked list is 4
+4 is inserted at the position
+the size of linked list is 5
+the element in linked list are 
+15 12 34 4 14 
