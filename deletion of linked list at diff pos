@@ -1,0 +1,93 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+class Node
+{
+    public:
+         int data;
+    Node* next;
+};
+void create(Node* *head,int x)
+{
+    Node* n =new Node();
+    n->data =x;
+    n->next =*head;
+    
+    *head =n;
+    cout<<x<<" is created"<<endl;
+}
+
+void deleteNode(Node* *head,int x)
+{
+    Node* temp =new Node();
+    temp=*head;
+    Node* prev =new Node();
+    if(temp->next ==NULL)   //1 node in ll 
+    {
+        *head=NULL;
+        free(temp);
+        cout<<x<<" is deleted"<<endl;
+        return;
+    }
+    if(temp != NULL && temp->data==x)
+    {
+        *head =temp->next;
+        cout<<x<<" is deleted"<<endl;
+        free(temp);
+        return;
+    }
+    while(temp!=NULL && temp->data!=x)
+    {
+        prev=temp;
+        temp =temp->next;
+    }
+    if(temp==NULL)
+    {
+        cout<<x<<" element not found"<<endl;
+        return;
+    }
+    prev->next =temp->next;
+    free(temp);
+    cout<<x<<" was deleted "<<endl;
+    
+}
+void display(Node* node)
+{
+    while(node!=NULL)
+    {
+        cout<<node->data<<" ";
+        node =node->next;
+    }
+    cout<<endl;
+}
+int main() {
+    Node* head =NULL;
+    create(&head,23);
+    create(&head,34);
+    create(&head,43);
+    create(&head,78);
+    create(&head,92);
+    cout<<"the elements before deletion are ";
+    display(head);
+    deleteNode(&head,23);
+    deleteNode(&head,92);
+    deleteNode(&head,78);
+    deleteNode(&head,213);
+    cout<<"the elements after deletion are ";
+    display(head);
+    
+   
+}
+
+o/p
+23 is created
+34 is created
+43 is created
+78 is created
+92 is created
+the elements before deletion are 92 78 43 34 23 
+23 was deleted 
+92 is deleted
+78 is deleted
+213 element not found
+the elements after deletion are 43 34 
