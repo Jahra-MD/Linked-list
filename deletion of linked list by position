@@ -1,0 +1,97 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+class Node {
+    public:
+          int data;
+    Node*  next;
+};
+int calSize(Node* n)
+{
+    int size=0;
+    while(n->next!=NULL)
+    {
+        size++;
+        n=n->next;
+    }
+    return size;
+}
+void insert(Node* *head,int data)
+{
+    Node* n =new Node();
+    n->data =data;
+    n->next =*head;
+    
+    *head =n;
+    cout<<n->data<<" is inserted"<<endl;
+    
+}
+void delNode(Node* *head,int pos)
+{
+    Node* temp =*head;
+    Node* prev;
+    int size =calSize(*head);
+    if(pos<1 || pos>size)
+    {
+        cout<<"the is no element at that position"<<endl;
+        return;
+    }
+    if(pos==1)
+    {
+        *head =temp->next;
+        cout<<temp->data<<" is deleted"<<endl;
+        free(temp);
+        return;
+    }
+    while(--pos)
+    {
+        prev =temp;
+        temp =temp->next;
+    }
+    prev->next =temp->next;
+    cout<<temp->data<<" is deleted"<<endl;
+    free(temp);
+    return;
+}
+void display(Node* n)
+{
+    while(n!=NULL)
+    {
+        cout<<n->data<<" ";
+        n =n->next;
+    }
+    cout<<endl;
+}
+int main() {
+    Node* head =NULL;
+    insert(&head,34);
+    insert(&head,45);
+    insert(&head,67);
+    insert(&head,23);
+    insert(&head,7);
+    insert(&head,3);
+    cout<<" element before deletion "<<endl;
+    display(head);
+    
+    delNode(&head,1);
+    delNode(&head,3);
+    cout<<" element after deletion "<<endl;
+    display(head);
+    
+    return 0;
+}
+
+
+o/p
+34 is inserted
+45 is inserted
+67 is inserted
+23 is inserted
+7 is inserted
+3 is inserted
+ element before deletion 
+3 7 23 67 45 34 
+3 is deleted
+67 is deleted
+ element after deletion 
+7 23 45 34 
