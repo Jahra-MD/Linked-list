@@ -1,0 +1,84 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+class Node
+{
+    public:
+       int data;
+    Node* next;
+    Node* prev;
+};
+void insertStart(Node* *head,int x)
+{
+    Node* n =new Node();
+    n->data =x;
+    n->next =*head;
+    n->prev =NULL;
+    if(*head!=NULL)
+    {
+        (*head)->prev =n;
+    }
+    *head =n;
+    cout<<x<<" is inserted at begin"<<endl;
+}
+void insertEnd(Node* *head,int x)
+{
+    Node* n =new Node();
+    n->data =x;
+    n->next =NULL;
+    if(*head ==NULL)
+    {
+        *head =n;
+        n->prev =NULL;
+        cout<<x<<" is inserted at the end"<<endl;
+        return;
+    }
+    Node* temp =*head;
+    while(temp->next!=NULL)
+    {
+        temp =temp->next;
+    }
+    temp->next =n;
+    n->prev =temp;
+    cout<<x<<" is inserted at the end"<<endl;
+}
+void display(Node* n)
+{
+    Node* end;
+    cout<<"the data in farward order"<<endl;
+    while(n!=NULL)
+    {
+        cout<<n->data<<" ";
+        end =n;
+        n =n->next;
+    }
+    cout<<endl;
+    cout<<"the data in backward order"<<endl;
+    while(end !=NULL)
+    {
+        cout<<end->data<<" ";
+        end =end->prev;
+        
+    }
+}
+int main() {
+    Node* head =NULL;
+    insertEnd(&head,67);
+    insertStart(&head,45);
+    insertStart(&head,5);
+    insertStart(&head,4);
+    insertEnd(&head,6);
+    display(head);
+}
+
+
+o/p
+67 is inserted at the end
+45 is inserted at begin
+5 is inserted at begin
+4 is inserted at begin
+6 is inserted at the end
+the data in farward order
+4 5 45 67 6 
+the data in backward order
+6 67 45 5 4 
