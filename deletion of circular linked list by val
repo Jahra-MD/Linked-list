@@ -1,0 +1,100 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+class Node
+{
+    public:
+       int data;
+    Node* next;
+    Node* prev;
+};
+void insertNode(Node* *head,int x)
+{
+    Node* n =new Node();
+    n->data =x;
+    n->prev =NULL;
+    n->next =*head;
+    
+    if(*head !=NULL)
+    {
+        (*head)->prev =n;
+    }
+    *head =n;
+    cout<<x<<" is inserted at the start \n";
+}
+void deleteNode(Node* *head,int delval)
+{
+    Node* temp = *head;
+    Node* previous =new Node();
+    if(temp->next ==NULL && temp->data ==delval)
+    {
+        *head =NULL;
+        free(temp);
+        cout<<delval<<" is deleted from linked list \n";
+        return;
+    }
+    if(temp !=NULL && temp->data ==delval)
+    {
+        *head =temp->next;
+        (*head)->prev =NULL;
+        free(temp);
+        cout<<delval<<" is deleted from linked list \n";
+        return;
+    }
+    while(temp!=NULL && temp->data!=delval)
+    {
+        previous =temp;
+        temp =temp->next;
+    }
+    if(temp==NULL)
+    {
+        cout<<delval<<" the element not found \n";
+        return;
+    }
+    previous->next =temp->next;
+    Node* temp2 =new Node();
+    if(temp->next ==NULL)
+    {
+        free(temp);
+        cout<<delval<<" is deleted \n";
+        return;
+        
+    }
+    temp2 =temp->next;
+    temp->prev =previous;
+    free(temp);
+    cout<<delval<<" is deleted \n";
+    return;
+}
+void display(Node * node) {
+    struct Node * end;
+    printf("List in Forward direction: ");
+    while (node != NULL) {
+        printf(" %d ", node -> data);
+        end = node;
+        node = node -> next;
+    }
+}
+int main() {
+    Node* head =NULL;
+    insertNode(&head,67);
+    insertNode(&head,6);
+    insertNode(&head,7);
+    insertNode(&head,8);
+    insertNode(&head,9);
+    deleteNode(&head,6);
+    deleteNode(&head,5);
+    display(head);
+    
+}
+
+
+o/p
+67 is inserted at the start 
+6 is inserted at the start 
+7 is inserted at the start 
+8 is inserted at the start 
+9 is inserted at the start 
+6 is deleted 
+5 the element not found 
+List in Forward direction:  9  8  7  67 
