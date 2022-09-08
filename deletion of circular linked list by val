@@ -61,7 +61,7 @@ void deleteNode(Node* *head,int delval)
         
     }
     temp2 =temp->next;
-    temp->prev =previous;
+    temp2->prev =previous;
     free(temp);
     cout<<delval<<" is deleted \n";
     return;
