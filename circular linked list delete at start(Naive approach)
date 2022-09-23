@@ -76,3 +76,8 @@ int main() {
     display(head);
     
 }
+
+o/p
+the elements present in linked list are 
+8 78 
+
