@@ -1,0 +1,78 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+class Node
+{
+    public:
+        int data;
+    Node* next;
+    Node(int val)
+    {
+        data = val;
+        next =NULL;
+    }
+};
+void insertNode(Node* *head,int data)
+{
+    Node* n =new Node(data);
+    if(*head ==NULL)
+    {
+        (*head) =n;
+        n->next =*head;
+        return;
+    }
+    n->next =(*head)->next;
+    (*head)->next =n;
+    int temp =(*head)->data;
+    (*head)->data =n->data;
+    n->data =temp;
+}
+void DeleteNode(Node* *head)
+{
+    if(*head ==NULL)
+    {
+        cout<<" linked list is empty "<<endl;
+        return;
+    }
+    if((*head)->next ==*head)
+    {
+        cout<< " Node deleted "<<(*head)->data<<endl;
+        *head =NULL;
+        return;
+    }
+    cout<<" The element deleted is "<<(*head)->data<<endl;
+     (*head)->data =(*head)->next->data;
+     Node* temp =(*head)->next;
+     (*head)->next = (*head)->next->next;
+     delete(temp);
+    
+}
+void display(Node* head)
+{
+    if(head ==NULL)
+    {
+        return;
+    }
+    Node* temp =head;
+    do
+    {
+        cout<<temp->data<<" ";
+        temp =temp->next;
+    }while(temp !=head);
+    cout<<"\n"<<endl;
+}
+int main() {
+    Node* head =NULL;
+    insertNode(&head,78);
+    insertNode(&head,8);
+    insertNode(&head,7);
+    DeleteNode(&head);
+    cout<<"the elements present in linked list are \n";
+    display(head);
+    
+}
+
+o/p
+The element deleted is 7
+the elements present in linked list are 
+8 78 
